@@ -16,15 +16,13 @@ public class Main {
             Country[] countries = objectMapper.readValue(new File("CountriesJSON/countries.json"), Country[].class);
             List<Country> countriesList = Arrays.asList(countries);
 
-            long totalPopulation = countriesList
-                    .stream()
+            long totalPopulation = countriesList.stream()
                     .map(Country::getPopulation)
                     .reduce(0L, Long::sum);
 
             System.out.println("Суммарная численность по странам: " + totalPopulation);
 
-            List<Currency> currenciesList = countriesList
-                    .stream()
+            List<Currency> currenciesList = countriesList.stream()
                     .map(Country::getCurrencies)
                     .flatMap(Arrays::stream)
                     .distinct()
@@ -32,8 +30,7 @@ public class Main {
 
             System.out.println("Перечень валют: " + currenciesList);
 
-            Country[] populationOverMillionCountries = countriesList
-                    .stream()
+            Country[] populationOverMillionCountries = countriesList.stream()
                     .filter(country -> country.getPopulation() >= 1000000)
                     .toArray(Country[]::new);
 
