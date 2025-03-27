@@ -1,8 +1,8 @@
 package ru.academits.orlov.excel_main;
 
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.academits.orlov.excel.Person;
 
 import java.io.FileOutputStream;
@@ -20,8 +20,8 @@ public class Main {
                 new Person("Орлов", "Евгений", 17, "+7(913)898-12-34")
         );
 
-        try (HSSFWorkbook workbook = new HSSFWorkbook();
-             FileOutputStream outputStream = new FileOutputStream("Excel/persons.xls")) {
+        try (XSSFWorkbook workbook = new XSSFWorkbook();
+             FileOutputStream outputStream = new FileOutputStream("Excel/persons.xlsx")) {
             Sheet personsSheet = workbook.createSheet("Persons");
             Row headerRow = personsSheet.createRow(0);
             CellStyle headerCellStyle = workbook.createCellStyle();
@@ -34,26 +34,18 @@ public class Main {
             headerCellStyle.setBottomBorderColor(IndexedColors.PLUM.getIndex());
             headerCellStyle.setBorderBottom(BorderStyle.THIN);
 
-            HSSFFont headerFont = workbook.createFont();
+            XSSFFont headerFont = workbook.createFont();
             headerFont.setFontName("Helvetica");
             headerFont.setFontHeightInPoints((short) 14);
             headerCellStyle.setFont(headerFont);
 
-            Cell headerCell = headerRow.createCell(0);
-            headerCell.setCellValue("Фамилия");
-            headerCell.setCellStyle(headerCellStyle);
+            List<String> tableHeaders = List.of("Фамилия", "Имя", "Телефон", "Возраст");
 
-            headerCell = headerRow.createCell(1);
-            headerCell.setCellValue("Имя");
-            headerCell.setCellStyle(headerCellStyle);
-
-            headerCell = headerRow.createCell(2);
-            headerCell.setCellValue("Телефон");
-            headerCell.setCellStyle(headerCellStyle);
-
-            headerCell = headerRow.createCell(3);
-            headerCell.setCellValue("Возраст");
-            headerCell.setCellStyle(headerCellStyle);
+            for (int i = 0; i < 4; i++) {
+                Cell headerCell = headerRow.createCell(i);
+                headerCell.setCellValue(tableHeaders.get(i));
+                headerCell.setCellStyle(headerCellStyle);
+            }
 
             CellStyle regularCellStyle = workbook.createCellStyle();
             regularCellStyle.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
@@ -64,22 +56,23 @@ public class Main {
             regularCellStyle.setBorderBottom(BorderStyle.DOTTED);
 
             for (int i = 0; i < personsList.size(); i++) {
-                Row personRow = personsSheet.createRow(i + 1);
+                Person currentPerson = personsList.get(i);
+                Row currentPersonRow = personsSheet.createRow(i + 1);
 
-                Cell surnameCell = personRow.createCell(0);
-                surnameCell.setCellValue(personsList.get(i).getSurname());
+                Cell surnameCell = currentPersonRow.createCell(0);
+                surnameCell.setCellValue(currentPerson.surname());
                 surnameCell.setCellStyle(regularCellStyle);
 
-                Cell nameCell = personRow.createCell(1);
-                nameCell.setCellValue(personsList.get(i).getName());
+                Cell nameCell = currentPersonRow.createCell(1);
+                nameCell.setCellValue(currentPerson.name());
                 nameCell.setCellStyle(regularCellStyle);
 
-                Cell phoneNumberCell = personRow.createCell(2);
-                phoneNumberCell.setCellValue(personsList.get(i).getPhoneNumber());
+                Cell phoneNumberCell = currentPersonRow.createCell(2);
+                phoneNumberCell.setCellValue(currentPerson.phoneNumber());
                 phoneNumberCell.setCellStyle(regularCellStyle);
 
-                Cell ageCell = personRow.createCell(3);
-                ageCell.setCellValue(personsList.get(i).getAge());
+                Cell ageCell = currentPersonRow.createCell(3);
+                ageCell.setCellValue(currentPerson.age());
                 ageCell.setCellStyle(regularCellStyle);
             }
 
