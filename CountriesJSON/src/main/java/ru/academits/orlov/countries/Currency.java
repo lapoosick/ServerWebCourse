@@ -19,6 +19,18 @@ public class Currency {
         return symbol;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

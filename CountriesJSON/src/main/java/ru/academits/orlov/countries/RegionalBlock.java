@@ -1,10 +1,12 @@
 package ru.academits.orlov.countries;
 
+import java.util.List;
+
 public class RegionalBlock {
     private String acronym;
     private String name;
-    private String[] otherAcronyms;
-    private String[] otherNames;
+    private List<String> otherAcronyms;
+    private List<String> otherNames;
 
     public String getAcronym() {
         return acronym;
@@ -14,11 +16,27 @@ public class RegionalBlock {
         return name;
     }
 
-    public String[] getOtherAcronyms() {
+    public List<String> getOtherAcronyms() {
         return otherAcronyms;
     }
 
-    public String[] getOtherNames() {
+    public List<String> getOtherNames() {
         return otherNames;
+    }
+
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOtherAcronyms(List<String> otherAcronyms) {
+        this.otherAcronyms = otherAcronyms;
+    }
+
+    public void setOtherNames(List<String> otherNames) {
+        this.otherNames = otherNames;
     }
 }

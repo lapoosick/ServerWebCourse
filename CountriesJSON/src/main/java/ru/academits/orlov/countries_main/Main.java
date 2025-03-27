@@ -1,5 +1,6 @@
 package ru.academits.orlov.countries_main;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.academits.orlov.countries.Country;
 import ru.academits.orlov.countries.Currency;
@@ -13,30 +14,32 @@ public class Main {
     public static void main(String[] args) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            Country[] countries = objectMapper.readValue(new File("CountriesJSON/countries.json"), Country[].class);
-            List<Country> countriesList = Arrays.asList(countries);
+            List<Country> countriesList = objectMapper.readValue(new File("countries.json"), new TypeReference<>() {});
 
-            long totalPopulation = countriesList.stream()
-                    .map(Country::getPopulation)
-                    .reduce(0L, Long::sum);
+            long totalPopulation = countriesList
+                    .stream()
+                    .mapToLong(Country::getPopulation)
+                    .sum();
 
             System.out.println("Суммарная численность по странам: " + totalPopulation);
 
-            List<Currency> currenciesList = countriesList.stream()
+            List<Currency> currenciesList = countriesList
+                    .stream()
                     .map(Country::getCurrencies)
-                    .flatMap(Arrays::stream)
+                    .flatMap(List::stream)
                     .distinct()
                     .toList();
 
             System.out.println("Перечень валют: " + currenciesList);
 
-            Country[] populationOverMillionCountries = countriesList.stream()
+            Country[] populationOverMillionCountries = countriesList
+                    .stream()
                     .filter(country -> country.getPopulation() >= 1000000)
                     .toArray(Country[]::new);
 
-            System.out.println("Страны, у которых численность населения не менее 1 млн:" + Arrays.toString(populationOverMillionCountries));
+            System.out.println("Страны, у которых численность населения не менее 1 млн: " + Arrays.toString(populationOverMillionCountries));
 
-            objectMapper.writeValue(new File("CountriesJSON/million-plus-cities.json"), populationOverMillionCountries);
+            objectMapper.writeValue(new File("million-plus-cities.json"), populationOverMillionCountries);
         } catch (IOException e) {
             System.out.println("Ошибка чтения файла: " + e.getMessage());
         }

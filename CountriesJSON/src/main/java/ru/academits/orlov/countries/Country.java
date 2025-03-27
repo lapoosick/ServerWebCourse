@@ -1,38 +1,39 @@
 package ru.academits.orlov.countries;
 
+import java.util.List;
 import java.util.Map;
 
 public class Country {
     private String name;
-    private String[] topLevelDomain;
+    private List<String> topLevelDomain;
     private String alpha2Code;
     private String alpha3Code;
-    private String[] callingCodes;
+    private List<String> callingCodes;
     private String capital;
-    private String[] altSpellings;
+    private List<String> altSpellings;
     private String region;
     private String subregion;
     private long population;
-    private double[] latlng;
+    private List<Double> latlng;
     private String demonym;
     private double area;
     private double gini;
-    private String[] timezones;
-    private String[] borders;
+    private List<String> timezones;
+    private List<String> borders;
     private String nativeName;
     private String numericCode;
-    private Currency[] currencies;
-    private Language[] languages;
+    private List<Currency> currencies;
+    private List<Language> languages;
     private Map<String, String> translations;
     private String flag;
-    private RegionalBlock[] regionalBlocs;
+    private List<RegionalBlock> regionalBlocs;
     private String cioc;
 
     public String getName() {
         return name;
     }
 
-    public String[] getTopLevelDomain() {
+    public List<String> getTopLevelDomain() {
         return topLevelDomain;
     }
 
@@ -44,7 +45,7 @@ public class Country {
         return alpha3Code;
     }
 
-    public String[] getCallingCodes() {
+    public List<String> getCallingCodes() {
         return callingCodes;
     }
 
@@ -52,7 +53,7 @@ public class Country {
         return capital;
     }
 
-    public String[] getAltSpellings() {
+    public List<String> getAltSpellings() {
         return altSpellings;
     }
 
@@ -68,7 +69,7 @@ public class Country {
         return population;
     }
 
-    public double[] getLatlng() {
+    public List<Double> getLatlng() {
         return latlng;
     }
 
@@ -84,11 +85,11 @@ public class Country {
         return gini;
     }
 
-    public String[] getTimezones() {
+    public List<String> getTimezones() {
         return timezones;
     }
 
-    public String[] getBorders() {
+    public List<String> getBorders() {
         return borders;
     }
 
@@ -100,11 +101,11 @@ public class Country {
         return numericCode;
     }
 
-    public Currency[] getCurrencies() {
+    public List<Currency> getCurrencies() {
         return currencies;
     }
 
-    public Language[] getLanguages() {
+    public List<Language> getLanguages() {
         return languages;
     }
 
@@ -116,12 +117,108 @@ public class Country {
         return flag;
     }
 
-    public RegionalBlock[] getRegionalBlocs() {
+    public List<RegionalBlock> getRegionalBlocs() {
         return regionalBlocs;
     }
 
     public String getCioc() {
         return cioc;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTopLevelDomain(List<String> topLevelDomain) {
+        this.topLevelDomain = topLevelDomain;
+    }
+
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
+    }
+
+    public void setAlpha3Code(String alpha3Code) {
+        this.alpha3Code = alpha3Code;
+    }
+
+    public void setCallingCodes(List<String> callingCodes) {
+        this.callingCodes = callingCodes;
+    }
+
+    public void setCapital(String capital) {
+        this.capital = capital;
+    }
+
+    public void setAltSpellings(List<String> altSpellings) {
+        this.altSpellings = altSpellings;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setSubregion(String subregion) {
+        this.subregion = subregion;
+    }
+
+    public void setPopulation(long population) {
+        this.population = population;
+    }
+
+    public void setLatlng(List<Double> latlng) {
+        this.latlng = latlng;
+    }
+
+    public void setDemonym(String demonym) {
+        this.demonym = demonym;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+
+    public void setGini(double gini) {
+        this.gini = gini;
+    }
+
+    public void setTimezones(List<String> timezones) {
+        this.timezones = timezones;
+    }
+
+    public void setBorders(List<String> borders) {
+        this.borders = borders;
+    }
+
+    public void setNativeName(String nativeName) {
+        this.nativeName = nativeName;
+    }
+
+    public void setNumericCode(String numericCode) {
+        this.numericCode = numericCode;
+    }
+
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
+
+    public void setTranslations(Map<String, String> translations) {
+        this.translations = translations;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public void setRegionalBlocs(List<RegionalBlock> regionalBlocs) {
+        this.regionalBlocs = regionalBlocs;
+    }
+
+    public void setCioc(String cioc) {
+        this.cioc = cioc;
     }
 
     @Override
