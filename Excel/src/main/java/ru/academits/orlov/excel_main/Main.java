@@ -1,7 +1,6 @@
 package ru.academits.orlov.excel_main;
 
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.academits.orlov.excel.Person;
 
@@ -34,15 +33,15 @@ public class Main {
             headerCellStyle.setBottomBorderColor(IndexedColors.PLUM.getIndex());
             headerCellStyle.setBorderBottom(BorderStyle.THIN);
 
-            XSSFFont headerFont = (XSSFFont) workbook.createFont();
+            Font headerFont = workbook.createFont();
             headerFont.setFontName("Helvetica");
             headerFont.setFontHeightInPoints((short) 14);
             headerCellStyle.setFont(headerFont);
 
             List<String> tableHeaders = List.of("Фамилия", "Имя", "Телефон", "Возраст");
-            int tableHeaderCount = tableHeaders.size();
+            int tableHeaderCellsCount = tableHeaders.size();
 
-            for (int i = 0; i < tableHeaderCount; i++) {
+            for (int i = 0; i < tableHeaderCellsCount; i++) {
                 Cell headerCell = headerRow.createCell(i);
                 headerCell.setCellValue(tableHeaders.get(i));
                 headerCell.setCellStyle(headerCellStyle);
@@ -77,7 +76,7 @@ public class Main {
                 ageCell.setCellStyle(regularCellStyle);
             }
 
-            IntStream.range(0, 4).forEach(personsSheet::autoSizeColumn);
+            IntStream.range(0, tableHeaderCellsCount).forEach(personsSheet::autoSizeColumn);
 
             workbook.write(outputStream);
         } catch (IOException e) {
