@@ -20,7 +20,7 @@ public class Main {
                 new Person("Орлов", "Евгений", 17, "+7(913)898-12-34")
         );
 
-        try (XSSFWorkbook workbook = new XSSFWorkbook();
+        try (Workbook workbook = new XSSFWorkbook();
              FileOutputStream outputStream = new FileOutputStream("Excel/persons.xlsx")) {
             Sheet personsSheet = workbook.createSheet("Persons");
             Row headerRow = personsSheet.createRow(0);
@@ -34,14 +34,15 @@ public class Main {
             headerCellStyle.setBottomBorderColor(IndexedColors.PLUM.getIndex());
             headerCellStyle.setBorderBottom(BorderStyle.THIN);
 
-            XSSFFont headerFont = workbook.createFont();
+            XSSFFont headerFont = (XSSFFont) workbook.createFont();
             headerFont.setFontName("Helvetica");
             headerFont.setFontHeightInPoints((short) 14);
             headerCellStyle.setFont(headerFont);
 
             List<String> tableHeaders = List.of("Фамилия", "Имя", "Телефон", "Возраст");
+            int tableHeaderCount = tableHeaders.size();
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < tableHeaderCount; i++) {
                 Cell headerCell = headerRow.createCell(i);
                 headerCell.setCellValue(tableHeaders.get(i));
                 headerCell.setCellStyle(headerCellStyle);
